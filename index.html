@@ -199,57 +199,61 @@
   </div>
 
   <script>
-    const QUESTIONS = [
-      {
-        id: 'category',
-        title: '무엇에 관한 걸 찾고 있나요?',
-        subtitle: '큰 카테고리부터 골라주세요',
-        options: [
-    { label: "1만원 이하", budgetKey: "low", scores: { budgetLow: 4 } },
-    { label: "3만원 이하", budgetKey: "mid", scores: { budgetMid: 4 } },
-    { label: "5만원 이하", budgetKey: "midHigh", scores: { budgetMidHigh: 4 } },
-    { label: "10만원 이상도 가능", budgetKey: "high", scores: { budgetHigh: 4 } },
-    { label: "랜덤", budgetKey: "random", scores: { random: 5 } },
-  ],
-      },
-      {
-        id: 'budget',
-        title: '예산은 어느 정도예요?',
-        subtitle: '대충 이 정도로 생각해도 돼요',
-        options: [
-          { label: '1만원 이하', scores: { budgetLow: 4 } },
-          { label: '3만원 이하', scores: { budgetMid: 4 } },
-          { label: '5만원 이하', scores: { budgetMidHigh: 4 } },
-          { label: '10만원 이상도 가능', scores: { budgetHigh: 4 } },
-          { label: '랜덤', scores: { random: 5 } },
-        ],
-      },
-      {
-        id: 'priceStyle',
-        title: '어떤 느낌을 원해요?',
-        subtitle: '가성비를 볼지, 돈값 하는 걸 볼지 골라주세요',
-        options: [
-          { label: '무조건 가성비', scores: { cheap: 5 } },
-          { label: '적당히 괜찮은 거', scores: { balanced: 5 } },
-          { label: '비싸도 좋으면 됨', scores: { premium: 5 } },
-          { label: '랜덤', scores: { random: 5 } },
-        ],
-      },
-      {
-        id: 'visualStyle',
-        title: '원하는 물건 스타일은 뭐예요?',
-        subtitle: '겉으로 보이는 느낌도 중요하죠',
-        options: [
-          { label: '깔끔한 느낌', scores: { simple: 5, home: 1, office: 1 } },
-          { label: '화려한 느낌', scores: { flashy: 5, gift: 1, toy: 1 } },
-          { label: '귀여운 느낌', scores: { cute: 5, kids: 1, gift: 1 } },
-          { label: '실용적인 느낌', scores: { useful: 5, study: 1, car: 1 } },
-          { label: '감성 있는 느낌', scores: { pretty: 5, home: 1, travel: 1 } },
-          { label: '랜덤', scores: { random: 5 } },
-        ],
-      },
-    ];
-
+   const QUESTIONS = [
+  {
+    id: "category",
+    title: "무엇에 관한 걸 찾고 있나요?",
+    subtitle: "큰 카테고리부터 골라주세요",
+    options: [
+      { label: "집", scores: { home: 4, living: 2, cleaning: 2 } },
+      { label: "차", scores: { car: 5, gadget: 1 } },
+      { label: "선물", scores: { gift: 5, pretty: 1 } },
+      { label: "공부", scores: { study: 5, gadget: 1 } },
+      { label: "어린이", scores: { kids: 5, toy: 2 } },
+      { label: "놀이", scores: { toy: 4, hobby: 2 } },
+      { label: "회사", scores: { office: 5, gadget: 1 } },
+      { label: "운동", scores: { fitness: 5, outdoor: 1 } },
+      { label: "여행", scores: { travel: 5, outdoor: 2 } },
+      { label: "랜덤", scores: { random: 10 } },
+    ],
+  },
+  {
+    id: "budget",
+    title: "예산은 어느 정도예요?",
+    subtitle: "대충 이 정도로 생각해도 돼요",
+    options: [
+      { label: "1만원 이하", budgetKey: "low", scores: { budgetLow: 4 } },
+      { label: "3만원 이하", budgetKey: "mid", scores: { budgetMid: 4 } },
+      { label: "5만원 이하", budgetKey: "midHigh", scores: { budgetMidHigh: 4 } },
+      { label: "10만원 이상도 가능", budgetKey: "high", scores: { budgetHigh: 4 } },
+      { label: "랜덤", budgetKey: "random", scores: { random: 5 } },
+    ],
+  },
+  {
+    id: "priceStyle",
+    title: "어떤 느낌을 원해요?",
+    subtitle: "가성비를 볼지, 돈값 하는 걸 볼지 골라주세요",
+    options: [
+      { label: "무조건 가성비", scores: { cheap: 5, simple: 1 } },
+      { label: "적당히 괜찮은 거", scores: { balanced: 5 } },
+      { label: "비싸도 좋으면 됨", scores: { premium: 5, flashy: 1 } },
+      { label: "랜덤", scores: { random: 5 } },
+    ],
+  },
+  {
+    id: "visualStyle",
+    title: "원하는 물건 스타일은 뭐예요?",
+    subtitle: "겉으로 보이는 느낌도 중요하죠",
+    options: [
+      { label: "깔끔한 느낌", scores: { simple: 5, home: 1, office: 1 } },
+      { label: "화려한 느낌", scores: { flashy: 5, gift: 1, toy: 1 } },
+      { label: "귀여운 느낌", scores: { cute: 5, kids: 1, gift: 1 } },
+      { label: "실용적인 느낌", scores: { useful: 5, study: 1, car: 1 } },
+      { label: "감성 있는 느낌", scores: { pretty: 5, home: 1, travel: 1 } },
+      { label: "랜덤", scores: { random: 5 } },
+    ],
+  },
+];
     const PRODUCTS = [
       { id: 1, category: 'home', name: '깔끔한 무선 청소기', price: '3만~6만원대', reason: '집에서 가장 체감이 큰 실전형 추천템', tags: ['집','실용','깔끔'], image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
       { id: 2, category: 'car', name: '차량용 고속 충전 거치대', price: '2만~5만원대', reason: '운전할 때 바로 체감되는 인기 실용템', tags: ['차','편의','실사용'], image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
