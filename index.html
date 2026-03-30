@@ -374,12 +374,7 @@
                 <span class="price">${product.price}</span>
               </div>
               <h3>${product.name}</h3>
-              <p>${product.reason}</p>
-              <div class="tag-row">
-                ${(product.tags || [])
-                  .map((tag) => `<span class="tag">#${tag}</span>`)
-                  .join("")}
-              </div>
+      
               <a href="${product.link}" target="_blank" rel="noreferrer">
                 <button class="buy-btn">쿠팡에서 보기</button>
               </a>
