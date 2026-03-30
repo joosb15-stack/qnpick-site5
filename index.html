@@ -200,23 +200,23 @@
 
   <script>
    const QUESTIONS = [
-  {
-    id: "category",
-    title: "무엇에 관한 걸 찾고 있나요?",
-    subtitle: "큰 카테고리부터 골라주세요",
-    options: [
-      { label: "집", scores: { home: 4, living: 2, cleaning: 2 } },
-      { label: "차", scores: { car: 5, gadget: 1 } },
-      { label: "선물", scores: { gift: 5, pretty: 1 } },
-      { label: "공부", scores: { study: 5, gadget: 1 } },
-      { label: "어린이", scores: { kids: 5, toy: 2 } },
-      { label: "놀이", scores: { toy: 4, hobby: 2 } },
-      { label: "회사", scores: { office: 5, gadget: 1 } },
-      { label: "운동", scores: { fitness: 5, outdoor: 1 } },
-      { label: "여행", scores: { travel: 5, outdoor: 2 } },
-      { label: "랜덤", scores: { random: 10 } },
-    ],
-  },
+ {
+  id: "category",
+  title: "무엇에 관한 걸 찾고 있나요?",
+  subtitle: "큰 카테고리부터 골라주세요",
+  options: [
+    { label: "집", categoryKey: "home", scores: { home: 4, living: 2, cleaning: 2 } },
+    { label: "차", categoryKey: "car", scores: { car: 5, gadget: 1 } },
+    { label: "선물", categoryKey: "gift", scores: { gift: 5, pretty: 1 } },
+    { label: "공부", categoryKey: "study", scores: { study: 5, gadget: 1 } },
+    { label: "어린이", categoryKey: "kids", scores: { kids: 5, toy: 2 } },
+    { label: "놀이", categoryKey: "toy", scores: { toy: 4, hobby: 2 } },
+    { label: "회사", categoryKey: "office", scores: { office: 5, gadget: 1 } },
+    { label: "운동", categoryKey: "fitness", scores: { fitness: 5, outdoor: 1 } },
+    { label: "여행", categoryKey: "travel", scores: { travel: 5, outdoor: 2 } },
+    { label: "랜덤", categoryKey: "random", scores: { random: 10 } },
+  ],
+},
   {
     id: "budget",
     title: "예산은 어느 정도예요?",
@@ -311,18 +311,33 @@
       const isFinished = answers.length === QUESTIONS.length;
       if (!isFinished) return null;
       const scoreMap = calculateScores(answers);
-      const topCategories = getTopCategories(scoreMap);
-      const budgetAnswer = answers.find((answer) => answer.budgetKey);
+
+const categoryAnswer = answers.find((answer) => answer.categoryKey);
+const selectedCategory = categoryAnswer?.categoryKey || "random";
+
+const budgetAnswer = answers.find((answer) => answer.budgetKey);
 const selectedBudget = budgetAnswer?.budgetKey || "random";
 
-const matchedProducts = PRODUCTS.filter((product) => {
-  const categoryMatch = topCategories.includes(product.category);
-  const budgetMatch =
-    selectedBudget === "random" || product.budget === selectedBudget;
+let matchedProducts;
 
-  return categoryMatch && budgetMatch;
-}).slice(0, 6);
-      return { scoreMap, topCategories, matchedProducts };
+if (selectedCategory === "random") {
+  matchedProducts = PRODUCTS.filter((product) => {
+    const budgetMatch =
+      selectedBudget === "random" || product.budget === selectedBudget;
+    return budgetMatch;
+  })
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 6);
+} else {
+  matchedProducts = PRODUCTS.filter((product) => {
+    const categoryMatch = product.category === selectedCategory;
+    const budgetMatch =
+      selectedBudget === "random" || product.budget === selectedBudget;
+    return categoryMatch && budgetMatch;
+  }).slice(0, 6);
+}
+
+return { scoreMap, selectedCategory, matchedProducts };
     }
 
     function render() {
