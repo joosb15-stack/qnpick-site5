@@ -198,187 +198,174 @@
     <div class="featured-grid" id="featuredGrid"></div>
   </div>
 
-  <script>
-   const QUESTIONS = [
- {
-  id: "category",
-  title: "무엇에 관한 걸 찾고 있나요?",
-  subtitle: "큰 카테고리부터 골라주세요",
-  options: [
-    { label: "집", categoryKey: "home", scores: { home: 4, living: 2, cleaning: 2 } },
-    { label: "차", categoryKey: "car", scores: { car: 5, gadget: 1 } },
-    { label: "선물", categoryKey: "gift", scores: { gift: 5, pretty: 1 } },
-    { label: "공부", categoryKey: "study", scores: { study: 5, gadget: 1 } },
-    { label: "어린이", categoryKey: "kids", scores: { kids: 5, toy: 2 } },
-    { label: "놀이", categoryKey: "toy", scores: { toy: 4, hobby: 2 } },
-    { label: "회사", categoryKey: "office", scores: { office: 5, gadget: 1 } },
-    { label: "운동", categoryKey: "fitness", scores: { fitness: 5, outdoor: 1 } },
-    { label: "여행", categoryKey: "travel", scores: { travel: 5, outdoor: 2 } },
-    { label: "랜덤", categoryKey: "random", scores: { random: 10 } },
-  ],
-},
-  {
-    id: "budget",
-    title: "예산은 어느 정도예요?",
-    subtitle: "대충 이 정도로 생각해도 돼요",
-    options: [
-      { label: "1만원 이하", budgetKey: "low", scores: { budgetLow: 4 } },
-      { label: "3만원 이하", budgetKey: "mid", scores: { budgetMid: 4 } },
-      { label: "5만원 이하", budgetKey: "midHigh", scores: { budgetMidHigh: 4 } },
-      { label: "10만원 이상도 가능", budgetKey: "high", scores: { budgetHigh: 4 } },
-      { label: "랜덤", budgetKey: "random", scores: { random: 5 } },
-    ],
-  },
- {
-  id: "priceStyle",
-  title: "어떤 느낌을 원해요?",
-  subtitle: "가성비를 볼지, 돈값 하는 걸 볼지 골라주세요",
-  options: [
-    { label: "무조건 가성비", priceKey: "cheap", scores: { cheap: 5, simple: 1 } },
-    { label: "적당히 괜찮은 거", priceKey: "balanced", scores: { balanced: 5 } },
-    { label: "비싸도 좋으면 됨", priceKey: "premium", scores: { premium: 5, flashy: 1 } },
-    { label: "랜덤", priceKey: "random", scores: { random: 5 } },
-  ],
-},
-  {
-    id: "visualStyle",
-    title: "원하는 물건 스타일은 뭐예요?",
-    subtitle: "겉으로 보이는 느낌도 중요하죠",
-    options: [
-      { label: "깔끔한 느낌", scores: { simple: 5, home: 1, office: 1 } },
-      { label: "화려한 느낌", scores: { flashy: 5, gift: 1, toy: 1 } },
-      { label: "귀여운 느낌", scores: { cute: 5, kids: 1, gift: 1 } },
-      { label: "실용적인 느낌", scores: { useful: 5, study: 1, car: 1 } },
-      { label: "감성 있는 느낌", scores: { pretty: 5, home: 1, travel: 1 } },
-      { label: "랜덤", scores: { random: 5 } },
-    ],
-  },
-];
-    const PRODUCTS = [
-      { id: 1, category: 'home', name: '깔끔한 무선 청소기', price: '3만~6만원대', reason: '집에서 가장 체감이 큰 실전형 추천템', tags: ['집','실용','깔끔'], image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 2, category: 'car', name: '차량용 고속 충전 거치대', price: '2만~5만원대', reason: '운전할 때 바로 체감되는 인기 실용템', tags: ['차','편의','실사용'], image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      {
-  id: 3,
-  budget: 'high',
-  priceType: "premium",
-  category: 'gift',
-  name: '주리에떼 24K 순금 레이어드 뱅글 컷팅볼 루카스 팔찌',
-  price: '1,088,800원',
-  reason: '고급스럽고 존재감 있는 선물용 주얼리 추천',
-  tags: ['선물', '주얼리', '고급'],
-  image: 'https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/ef67/9a366b24dae9e7375dd7607eb0c42f330c86d74da5b8f1d73bfdda620b9a.jpg',
-  link: 'https://link.coupang.com/a/ed5DRQ',
-},
-      { id: 4, category: 'study', name: '데스크 집중 스탠드', price: '2만~5만원대', reason: '공부하거나 일할 때 만족도가 높은 책상템', tags: ['공부','집중','책상'], image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 5, category: 'kids', name: '어린이 감성 놀이템', price: '1만~3만원대', reason: '귀엽고 반응 좋은 어린이용 추천템', tags: ['어린이','귀여움','놀이'], image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 6, category: 'toy', name: '재미있는 놀이 아이템', price: '1만~5만원대', reason: '심심할 때 만족감 높은 가벼운 추천', tags: ['놀이','재미','랜덤'], image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 7, category: 'office', name: '회사 책상 정리 세트', price: '1만~4만원대', reason: '회사에서 보기 좋고 실용적인 사무용 추천', tags: ['회사','깔끔','실용'], image: 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 8, category: 'fitness', name: '홈트 입문 운동템', price: '2만~6만원대', reason: '운동 시작할 때 무난하게 고르기 좋은 추천', tags: ['운동','입문','실용'], image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 9, category: 'travel', name: '여행용 파우치 세트', price: '1만~3만원대', reason: '여행 갈 때 깔끔하게 챙기기 좋은 필수템', tags: ['여행','정리','깔끔'], image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 10, category: 'random', name: '오늘의 랜덤 추천템', price: '랜덤', reason: '고르기 귀찮을 때 그냥 눌러보는 재미용 추천', tags: ['랜덤','재미','추천'], image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 11, category: 'pretty', name: '감성 무드 조명', price: '2만~4만원대', reason: '예쁘고 분위기 있는 스타일을 원할 때 잘 맞음', tags: ['감성','예쁨','분위기'], image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' },
-      { id: 12, category: 'gadget', name: '작고 유용한 전자템', price: '2만~5만원대', reason: '가볍게 만족도 높은 전자제품 추천', tags: ['전자','유용','인기'], image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80', link: 'https://partners.coupang.com/' }
-    ];
+ <script>
+  const QUESTIONS = [
+    {
+      id: "category",
+      title: "무엇에 관한 걸 찾고 있나요?",
+      subtitle: "큰 카테고리부터 골라주세요",
+      options: [
+        { label: "집", categoryKey: "home" },
+        { label: "차", categoryKey: "car" },
+        { label: "선물", categoryKey: "gift" },
+        { label: "공부", categoryKey: "study" },
+        { label: "어린이", categoryKey: "kids" },
+        { label: "놀이", categoryKey: "toy" },
+        { label: "회사", categoryKey: "office" },
+        { label: "운동", categoryKey: "fitness" },
+        { label: "여행", categoryKey: "travel" },
+        { label: "랜덤", categoryKey: "random" },
+      ],
+    },
+    {
+      id: "budget",
+      title: "예산은 어느 정도예요?",
+      subtitle: "대충 이 정도로 생각해도 돼요",
+      options: [
+        { label: "1만원 이하", budgetKey: "low" },
+        { label: "3만원 이하", budgetKey: "mid" },
+        { label: "5만원 이하", budgetKey: "midHigh" },
+        { label: "10만원 이상도 가능", budgetKey: "high" },
+        { label: "랜덤", budgetKey: "random" },
+      ],
+    },
+    {
+      id: "priceStyle",
+      title: "어떤 느낌을 원해요?",
+      subtitle: "가성비를 볼지, 돈값 하는 걸 볼지 골라주세요",
+      options: [
+        { label: "무조건 가성비", priceKey: "cheap" },
+        { label: "적당히 괜찮은 거", priceKey: "balanced" },
+        { label: "비싸도 좋으면 됨", priceKey: "premium" },
+        { label: "랜덤", priceKey: "random" },
+      ],
+    },
+    {
+      id: "visualStyle",
+      title: "원하는 물건 스타일은 뭐예요?",
+      subtitle: "겉으로 보이는 느낌도 중요하죠",
+      options: [
+        { label: "깔끔한 느낌", styleKey: "simple" },
+        { label: "화려한 느낌", styleKey: "flashy" },
+        { label: "귀여운 느낌", styleKey: "cute" },
+        { label: "실용적인 느낌", styleKey: "useful" },
+        { label: "감성 있는 느낌", styleKey: "pretty" },
+        { label: "랜덤", styleKey: "random" },
+      ],
+    },
+  ];
 
-    let step = 0;
-    let answers = [];
+  const PRODUCTS = [
+   
 
-    function calculateScores(answers) {
-      const total = {};
-      answers.forEach((answer) => {
-        Object.entries(answer.scores).forEach(([category, value]) => {
-          total[category] = (total[category] || 0) + value;
-        });
+  ];
+
+  let step = 0;
+  let answers = [];
+
+  function shuffle(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+  }
+
+  function pickFeaturedProducts(result) {
+    if (!PRODUCTS.length) return [];
+    if (!result || !result.matchedProducts.length) return PRODUCTS.slice(0, 3);
+    return result.matchedProducts.slice(0, 3);
+  }
+
+  function currentResult() {
+    const isFinished = answers.length === QUESTIONS.length;
+    if (!isFinished) return null;
+
+    const categoryAnswer = answers.find((answer) => answer.categoryKey);
+    const selectedCategory = categoryAnswer?.categoryKey || "random";
+
+    const budgetAnswer = answers.find((answer) => answer.budgetKey);
+    const selectedBudget = budgetAnswer?.budgetKey || "random";
+
+    const priceAnswer = answers.find((answer) => answer.priceKey);
+    const selectedPriceType = priceAnswer?.priceKey || "random";
+
+    const styleAnswer = answers.find((answer) => answer.styleKey);
+    const selectedStyleType = styleAnswer?.styleKey || "random";
+
+    let matchedProducts = PRODUCTS.filter((product) => {
+      const categoryMatch =
+        selectedCategory === "random" || product.category === selectedCategory;
+
+      const budgetMatch =
+        selectedBudget === "random" || product.budget === selectedBudget;
+
+      const priceMatch =
+        selectedPriceType === "random" || product.priceType === selectedPriceType;
+
+      const styleMatch =
+        selectedStyleType === "random" || product.styleType === selectedStyleType;
+
+      return categoryMatch && budgetMatch && priceMatch && styleMatch;
+    });
+
+    const hasAnyRandom =
+      selectedCategory === "random" ||
+      selectedBudget === "random" ||
+      selectedPriceType === "random" ||
+      selectedStyleType === "random";
+
+    if (hasAnyRandom) {
+      matchedProducts = shuffle(matchedProducts);
+    }
+
+    matchedProducts = matchedProducts.slice(0, 6);
+
+    return {
+      selectedCategory,
+      selectedBudget,
+      selectedPriceType,
+      selectedStyleType,
+      matchedProducts,
+    };
+  }
+
+  function renderQuestion(question, contentArea) {
+    contentArea.innerHTML =
+      '<div class="option-grid">' +
+      question.options
+        .map(
+          (option) =>
+            `<button class="option-btn" data-label="${option.label}">${option.label}</button>`
+        )
+        .join("") +
+      "</div>";
+
+    contentArea.querySelectorAll(".option-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const option = question.options.find((o) => o.label === btn.dataset.label);
+        answers.push(option);
+        step += 1;
+        render();
       });
-      return total;
+    });
+  }
+
+  function renderResults(result, contentArea) {
+    if (!result || !result.matchedProducts.length) {
+      contentArea.innerHTML = `
+        <div style="background:white; color:#1f2937; border-radius:24px; padding:24px; text-align:center;">
+          <h3 style="margin:0 0 10px; font-size:24px;">조건에 맞는 상품이 아직 없어요</h3>
+          <p style="margin:0; color:#6b7280; line-height:1.6;">
+            PRODUCTS 배열에 상품을 추가하거나,<br />
+            예산 / 가격스타일 / 스타일 조건을 넓혀보세요.
+          </p>
+        </div>
+      `;
+      return;
     }
 
-    function getTopCategories(scoreMap) {
-      const hasRandom = (scoreMap.random || 0) >= 10;
-      if (hasRandom) return ['random', 'pretty', 'gadget'];
-      return Object.entries(scoreMap)
-        .filter(([key]) => !['budgetLow','budgetMid','budgetMidHigh','budgetHigh','cheap','balanced','premium','simple','flashy','cute','useful'].includes(key))
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 3)
-        .map(([key]) => key);
-    }
-
-    function pickFeaturedProducts(result) {
-      if (!result) return PRODUCTS.slice(0, 3);
-      return result.matchedProducts.slice(0, 3);
-    }
-
-    function currentResult() {
-      const isFinished = answers.length === QUESTIONS.length;
-      if (!isFinished) return null;
-      const scoreMap = calculateScores(answers);
-
-const categoryAnswer = answers.find((answer) => answer.categoryKey);
-const selectedCategory = categoryAnswer?.categoryKey || "random";
-
-const budgetAnswer = answers.find((answer) => answer.budgetKey);
-const selectedBudget = budgetAnswer?.budgetKey || "random";
-
-const priceAnswer = answers.find((answer) => answer.priceKey);
-const selectedPriceType = priceAnswer?.priceKey || "random";
-
-let matchedProducts;
-
-if (selectedCategory === "random") {
-  matchedProducts = PRODUCTS.filter((product) => {
-    const budgetMatch =
-      selectedBudget === "random" || product.budget === selectedBudget;
-    const priceMatch =
-      selectedPriceType === "random" || product.priceType === selectedPriceType;
-    return budgetMatch && priceMatch;
-  })
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 6);
-} else {
-  matchedProducts = PRODUCTS.filter((product) => {
-    const categoryMatch = product.category === selectedCategory;
-    const budgetMatch =
-      selectedBudget === "random" || product.budget === selectedBudget;
-    const priceMatch =
-      selectedPriceType === "random" || product.priceType === selectedPriceType;
-
-    return categoryMatch && budgetMatch && priceMatch;
-  }).slice(0, 6);
-}
-return { scoreMap, selectedCategory, matchedProducts };
-    }
-
-    function render() {
-      const progressText = document.getElementById('progressText');
-      const questionTitle = document.getElementById('questionTitle');
-      const questionSubtitle = document.getElementById('questionSubtitle');
-      const contentArea = document.getElementById('contentArea');
-      const featuredGrid = document.getElementById('featuredGrid');
-
-      const isFinished = answers.length === QUESTIONS.length;
-      const question = QUESTIONS[step];
-      const result = currentResult();
-      const featuredProducts = pickFeaturedProducts(result);
-
-      progressText.textContent = isFinished ? '추천 완료' : `질문 ${step + 1} / ${QUESTIONS.length}`;
-      questionTitle.textContent = isFinished ? '당신한테 맞는 추천 결과' : question.title;
-      questionSubtitle.textContent = isFinished ? '' : question.subtitle;
-
-      if (!isFinished) {
-        contentArea.innerHTML = '<div class="option-grid">' + question.options.map(option =>
-          `<button class="option-btn" data-label="${option.label}">${option.label}</button>`
-        ).join('') + '</div>';
-
-        contentArea.querySelectorAll('.option-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const option = question.options.find(o => o.label === btn.dataset.label);
-            answers.push(option);
-            step += 1;
-            render();
-          });
-        });
-      } else {
-        contentArea.innerHTML = '<div class="result-grid">' + result.matchedProducts.map((product, index) => `
+    contentArea.innerHTML =
+      '<div class="result-grid">' +
+      result.matchedProducts
+        .map(
+          (product, index) => `
           <div class="card">
             <img src="${product.image}" alt="${product.name}">
             <div class="card-body">
@@ -389,17 +376,38 @@ return { scoreMap, selectedCategory, matchedProducts };
               <h3>${product.name}</h3>
               <p>${product.reason}</p>
               <div class="tag-row">
-                ${product.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                ${(product.tags || [])
+                  .map((tag) => `<span class="tag">#${tag}</span>`)
+                  .join("")}
               </div>
               <a href="${product.link}" target="_blank" rel="noreferrer">
                 <button class="buy-btn">쿠팡에서 보기</button>
               </a>
             </div>
           </div>
-        `).join('') + '</div>';
-      }
+        `
+        )
+        .join("") +
+      "</div>";
+  }
 
-      featuredGrid.innerHTML = featuredProducts.map((product) => `
+  function renderFeatured(featuredProducts) {
+    const featuredGrid = document.getElementById("featuredGrid");
+
+    if (!featuredProducts.length) {
+      featuredGrid.innerHTML = `
+        <div class="featured-card">
+          <p class="featured-label">쿠팡파트너스</p>
+          <h3>상품을 추가해 주세요</h3>
+          <p>PRODUCTS 배열에 상품을 넣으면 여기에 자동으로 표시돼요</p>
+        </div>
+      `;
+      return;
+    }
+
+    featuredGrid.innerHTML = featuredProducts
+      .map(
+        (product) => `
         <div class="featured-card">
           <p class="featured-label">쿠팡파트너스</p>
           <h3>오늘 가장 잘 나가는 추천</h3>
@@ -408,16 +416,48 @@ return { scoreMap, selectedCategory, matchedProducts };
             <button class="featured-btn">보러가기</button>
           </a>
         </div>
-      `).join('');
+      `
+      )
+      .join("");
+  }
+
+  function render() {
+    const progressText = document.getElementById("progressText");
+    const questionTitle = document.getElementById("questionTitle");
+    const questionSubtitle = document.getElementById("questionSubtitle");
+    const contentArea = document.getElementById("contentArea");
+
+    const isFinished = answers.length === QUESTIONS.length;
+    const question = QUESTIONS[step];
+    const result = currentResult();
+    const featuredProducts = pickFeaturedProducts(result);
+
+    progressText.textContent = isFinished
+      ? "추천 완료"
+      : `질문 ${step + 1} / ${QUESTIONS.length}`;
+
+    questionTitle.textContent = isFinished
+      ? "당신한테 맞는 추천 결과"
+      : question.title;
+
+    questionSubtitle.textContent = isFinished ? "" : question.subtitle;
+
+    if (!isFinished) {
+      renderQuestion(question, contentArea);
+    } else {
+      renderResults(result, contentArea);
     }
 
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      step = 0;
-      answers = [];
-      render();
-    });
+    renderFeatured(featuredProducts);
+  }
 
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    step = 0;
+    answers = [];
     render();
-  </script>
+  });
+
+  render();
+</script>
 </body>
 </html>
