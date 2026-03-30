@@ -229,17 +229,17 @@
       { label: "랜덤", budgetKey: "random", scores: { random: 5 } },
     ],
   },
-  {
-    id: "priceStyle",
-    title: "어떤 느낌을 원해요?",
-    subtitle: "가성비를 볼지, 돈값 하는 걸 볼지 골라주세요",
-    options: [
-      { label: "무조건 가성비", scores: { cheap: 5, simple: 1 } },
-      { label: "적당히 괜찮은 거", scores: { balanced: 5 } },
-      { label: "비싸도 좋으면 됨", scores: { premium: 5, flashy: 1 } },
-      { label: "랜덤", scores: { random: 5 } },
-    ],
-  },
+ {
+  id: "priceStyle",
+  title: "어떤 느낌을 원해요?",
+  subtitle: "가성비를 볼지, 돈값 하는 걸 볼지 골라주세요",
+  options: [
+    { label: "무조건 가성비", priceKey: "cheap", scores: { cheap: 5, simple: 1 } },
+    { label: "적당히 괜찮은 거", priceKey: "balanced", scores: { balanced: 5 } },
+    { label: "비싸도 좋으면 됨", priceKey: "premium", scores: { premium: 5, flashy: 1 } },
+    { label: "랜덤", priceKey: "random", scores: { random: 5 } },
+  ],
+},
   {
     id: "visualStyle",
     title: "원하는 물건 스타일은 뭐예요?",
@@ -260,6 +260,7 @@
       {
   id: 3,
   budget: 'high',
+  priceType: "premium",
   category: 'gift',
   name: '주리에떼 24K 순금 레이어드 뱅글 컷팅볼 루카스 팔찌',
   price: '1,088,800원',
@@ -318,13 +319,18 @@ const selectedCategory = categoryAnswer?.categoryKey || "random";
 const budgetAnswer = answers.find((answer) => answer.budgetKey);
 const selectedBudget = budgetAnswer?.budgetKey || "random";
 
+const priceAnswer = answers.find((answer) => answer.priceKey);
+const selectedPriceType = priceAnswer?.priceKey || "random";
+
 let matchedProducts;
 
 if (selectedCategory === "random") {
   matchedProducts = PRODUCTS.filter((product) => {
     const budgetMatch =
       selectedBudget === "random" || product.budget === selectedBudget;
-    return budgetMatch;
+    const priceMatch =
+      selectedPriceType === "random" || product.priceType === selectedPriceType;
+    return budgetMatch && priceMatch;
   })
     .sort(() => Math.random() - 0.5)
     .slice(0, 6);
@@ -333,10 +339,12 @@ if (selectedCategory === "random") {
     const categoryMatch = product.category === selectedCategory;
     const budgetMatch =
       selectedBudget === "random" || product.budget === selectedBudget;
-    return categoryMatch && budgetMatch;
+    const priceMatch =
+      selectedPriceType === "random" || product.priceType === selectedPriceType;
+
+    return categoryMatch && budgetMatch && priceMatch;
   }).slice(0, 6);
 }
-
 return { scoreMap, selectedCategory, matchedProducts };
     }
 
